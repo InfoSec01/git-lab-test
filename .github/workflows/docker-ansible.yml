@@ -1,0 +1,28 @@
+name: Docker + Ansible CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-ansible:
+    runs-on: ubuntu-latest
+
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
+
+  - name: Set up Docker
+    uses: docker/setup-buildx-action@v3
+
+  - name: Build Docker image
+    run: docker build -t my-nginx-image .
+
+  - name: Install Ansible
+    run: |
+      sudo apt update
+      sudo apt install -y ansible
+
+  - name: Run Ansible plybook
+    run: |
+      ansible-playbook ansible/site.yml

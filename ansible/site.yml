@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Print Hello from Ansible
+      debug:
+      msg: "This is a test run of Ansible playbook from GitHun Actions"
+
